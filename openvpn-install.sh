@@ -258,9 +258,6 @@ dh dh.pem
 tls-auth ta.key 0
 topology subnet
 server 10.8.0.0 255.255.255.0
-tun-mtu 6000
-fragment 0
-mssfix 0
 ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 	echo 'push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/server.conf
 	# DNS
@@ -296,7 +293,7 @@ ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 		;;
 	esac
 	echo "keepalive 10 120
-cipher AES-256-CBC
+cipher BF-CBC
 compress lz4
 user nobody
 group $GROUPNAME
@@ -304,6 +301,9 @@ persist-key
 persist-tun
 status openvpn-status.log
 verb 3
+tun-mtu 6000
+fragment 0
+mssfix 0
 crl-verify crl.pem" >> /etc/openvpn/server.conf
 	# Enable net.ipv4.ip_forward for the system
 	sed -i '/\<net.ipv4.ip_forward\>/c\net.ipv4.ip_forward=1' /etc/sysctl.conf
@@ -387,7 +387,7 @@ nobind
 persist-key
 persist-tun
 remote-cert-tls server
-cipher AES-256-CBC
+cipher BF-CBC
 compress lz4
 setenv opt block-outside-dns
 key-direction 1
