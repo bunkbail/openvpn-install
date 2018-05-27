@@ -255,7 +255,7 @@ ca ca.crt
 cert server.crt
 key server.key
 dh dh.pem
-auth SHA512
+auth none
 tls-auth ta.key 0
 topology subnet
 server 10.8.0.0 255.255.255.0
@@ -294,8 +294,8 @@ ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 		;;
 	esac
 	echo "keepalive 10 120
-cipher AES-256-CBC
-comp-lzo
+cipher none
+compress lz4
 user nobody
 group $GROUPNAME
 persist-key
@@ -385,9 +385,9 @@ nobind
 persist-key
 persist-tun
 remote-cert-tls server
-auth SHA512
-cipher AES-256-CBC
-comp-lzo
+auth none
+cipher none
+compress lz4
 setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
