@@ -255,7 +255,7 @@ ca ca.crt
 cert server.crt
 key server.key
 dh dh.pem
-tls-auth ta.key 0
+auth none
 topology subnet
 server 10.8.0.0 255.255.255.0
 ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
@@ -293,7 +293,7 @@ ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 		;;
 	esac
 	echo "keepalive 10 120
-cipher aes-256-cbc
+cipher none
 compress lz4
 user nobody
 group $GROUPNAME
@@ -301,10 +301,9 @@ persist-key
 persist-tun
 status openvpn-status.log
 verb 3
-tun-mtu 48000
+tun-mtu 9000
 fragment 0
 mssfix 0
-engine aesni
 crl-verify crl.pem" >> /etc/openvpn/server.conf
 	# Enable net.ipv4.ip_forward for the system
 	sed -i '/\<net.ipv4.ip_forward\>/c\net.ipv4.ip_forward=1' /etc/sysctl.conf
@@ -388,15 +387,15 @@ nobind
 persist-key
 persist-tun
 remote-cert-tls server
-cipher aes-256-cbc
+auth none
+cipher none
 compress lz4
 setenv opt block-outside-dns
 key-direction 1
 verb 3
-tun-mtu 48000
+tun-mtu 9000
 fragment 0
-mssfix 0
-engine aesni" > /etc/openvpn/client-common.txt
+mssfix 0" > /etc/openvpn/client-common.txt
 	# Generates the custom client.ovpn
 	newclient "$CLIENT"
 	echo
