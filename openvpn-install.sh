@@ -258,10 +258,10 @@ dh dh.pem
 tls-auth ta.key 0
 topology subnet
 server 10.8.0.0 255.255.255.0
-ifconfig-pool-persist ipp.txt
 tun-mtu 6000
 fragment 0
-mssfix 0" > /etc/openvpn/server.conf
+mssfix 0
+ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 	echo 'push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/server.conf
 	# DNS
 	case $DNS in
