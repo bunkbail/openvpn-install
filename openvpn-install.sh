@@ -293,7 +293,7 @@ ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 		;;
 	esac
 	echo "keepalive 10 120
-cipher BF-CBC
+cipher aes-256-cbc
 compress lz4
 user nobody
 group $GROUPNAME
@@ -304,6 +304,7 @@ verb 3
 tun-mtu 48000
 fragment 0
 mssfix 0
+engine aesni
 crl-verify crl.pem" >> /etc/openvpn/server.conf
 	# Enable net.ipv4.ip_forward for the system
 	sed -i '/\<net.ipv4.ip_forward\>/c\net.ipv4.ip_forward=1' /etc/sysctl.conf
@@ -387,14 +388,15 @@ nobind
 persist-key
 persist-tun
 remote-cert-tls server
-cipher BF-CBC
+cipher aes-256-cbc
 compress lz4
 setenv opt block-outside-dns
 key-direction 1
 verb 3
 tun-mtu 48000
 fragment 0
-mssfix 0" > /etc/openvpn/client-common.txt
+mssfix 0
+engine aesni" > /etc/openvpn/client-common.txt
 	# Generates the custom client.ovpn
 	newclient "$CLIENT"
 	echo
