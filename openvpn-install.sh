@@ -258,7 +258,10 @@ dh dh.pem
 tls-auth ta.key 0
 topology subnet
 server 10.8.0.0 255.255.255.0
-ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
+ifconfig-pool-persist ipp.txt
+tun-mtu 6000
+fragment 0
+mssfix 0" > /etc/openvpn/server.conf
 	echo 'push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/server.conf
 	# DNS
 	case $DNS in
@@ -388,7 +391,10 @@ cipher AES-256-CBC
 compress lz4
 setenv opt block-outside-dns
 key-direction 1
-verb 3" > /etc/openvpn/client-common.txt
+verb 3
+tun-mtu 6000
+fragment 0
+mssfix 0" > /etc/openvpn/client-common.txt
 	# Generates the custom client.ovpn
 	newclient "$CLIENT"
 	echo
