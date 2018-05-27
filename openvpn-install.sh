@@ -301,7 +301,7 @@ persist-key
 persist-tun
 status openvpn-status.log
 verb 3
-tun-mtu 6000
+tun-mtu 48000
 fragment 0
 mssfix 0
 crl-verify crl.pem" >> /etc/openvpn/server.conf
@@ -392,7 +392,7 @@ compress lz4
 setenv opt block-outside-dns
 key-direction 1
 verb 3
-tun-mtu 6000
+tun-mtu 48000
 fragment 0
 mssfix 0" > /etc/openvpn/client-common.txt
 	# Generates the custom client.ovpn
